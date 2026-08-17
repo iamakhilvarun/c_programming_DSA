@@ -30,6 +30,7 @@ int main()
             sum[i]=poly1[i]+poly2[i];
         }
 
+        printf("\nSum:\n");
         // printing the sum of the polynomial
         for(int i=0;i<=degree;i++){
             printf("%d",sum[i]);
