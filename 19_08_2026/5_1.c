@@ -29,6 +29,23 @@ void insertbeginning()
         head = newnode;
     }
 }
+void insert_end()
+{
+    struct node *newnode = (struct node *)malloc(sizeof(struct node));
+    struct node *temp = head;
+
+    if (head == NULL)
+    {
+        head = newnode;
+        return;
+    }
+    while (temp->next != NULL)
+    {
+        temp = temp->next;
+    }
+    temp->next = newnode;
+    newnode->prev = temp;
+}
 void insertatanypos()
 {
     int pos;
@@ -114,6 +131,7 @@ int main()
             insert();
             break;
         case 3:
+            insert_end();
             break;
         case 4:
             break;
