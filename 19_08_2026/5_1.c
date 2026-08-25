@@ -88,8 +88,18 @@ void insertatanypos()
     temp->next = newnode;
 }
 
-void delete ()
+void delete_at_beginning ()
 {
+    if(head==NULL){
+        printf("list it empty!");
+        return;
+    }
+    struct node * temp=head;
+    head=head->next;
+    if(head!=NULL){
+        head->prev=NULL;
+    }
+    free(temp);
 }
 
 void traverse()
