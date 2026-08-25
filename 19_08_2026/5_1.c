@@ -30,7 +30,8 @@ void insertbeginning()
     }
 }
 void insert()
-{   int pos;
+{
+    int pos;
     struct node *temp = head;
     struct node *prevnode = NULL;
 
@@ -75,6 +76,10 @@ void insert()
     }
 }
 
+void delete(){
+    
+}
+
 void traverse()
 {
     if (!head)
@@ -102,8 +107,8 @@ int main()
         printf("4) Delete\n");
         printf("5) Traverse\n");
         printf("6) Exit the program.....\n");
-        
-        scanf("%d",&choice);
+
+        scanf("%d", &choice);
 
         switch (choice)
         {
@@ -114,11 +119,16 @@ int main()
             insert();
             break;
         case 3:
-        traverse();
-        break;
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+            case 6:
+            traverse();
+            break;
         default:
             break;
         }
-    }
-        while (choice!=6);
+    } while (choice != 6);
 }
