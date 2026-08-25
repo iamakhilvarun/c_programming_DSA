@@ -29,55 +29,50 @@ void insertbeginning()
         head = newnode;
     }
 }
-void insert()
+void insertatanypos()
 {
     int pos;
-    struct node *temp = head;
-    struct node *prevnode = NULL;
-
-    if (head == NULL)
-    {
-        insertbeginning();
-        return;
-    }
-    printf("\nEnter the postion: ");
+    printf("Enter the pos: ");
     scanf("%d", &pos);
-
     struct node *newnode = (struct node *)malloc(sizeof(struct node));
-
-    printf("\nEnter the data: ");
+    struct node *temp = head;
+    printf("Enter the data:");
     scanf("%d", &newnode->data);
 
-    if (pos == 1)
+    if (!head)
     {
-        newnode->next = head;
+        newnode->next = NULL;
         newnode->prev = NULL;
-        head->prev = newnode;
         head = newnode;
         return;
     }
-
-    int i = 1;
-    temp = head; //travrese
-    while (temp != NULL && i < pos)
+    if (pos == 1)
     {
-        prevnode = temp;
+        insertatbeginning();
+        return;
+    }
+    // traversing to next node
+    for (int i = 1; i < pos - 1 && temp != NULL; i++)
+    {
         temp = temp->next;
-        i++;
     }
 
-    newnode->next = temp;
-    newnode->prev = prevnode;
-
-    prevnode->next = newnode;
-    if (temp != NULL)
+    if (temp == NULL)
     {
-        temp->prev = newnode;
+        printf("Invaild position");
+        return;
     }
+    newnode->next = temp->next;
+    newnode->prev = temp;
+    if (temp->next != NULL)
+    {
+        temp->next->prev = newnode;
+    }
+    temp->next = newnode;
 }
 
-void delete(){
-    
+void delete ()
+{
 }
 
 void traverse()
@@ -124,7 +119,7 @@ int main()
             break;
         case 5:
             break;
-            case 6:
+        case 6:
             traverse();
             break;
         default:
