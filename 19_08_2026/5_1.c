@@ -88,20 +88,72 @@ void insertatanypos()
     temp->next = newnode;
 }
 
-void delete_at_beginning ()
+void delete_at_beginning()
 {
-    if(head==NULL){
+    if (head == NULL)
+    {
         printf("list it empty!");
         return;
     }
-    struct node * temp=head;
-    head=head->next;
-    if(head!=NULL){
-        head->prev=NULL;
+    struct node *temp = head;
+    head = head->next;
+    if (head != NULL)
+    {
+        head->prev = NULL;
     }
     free(temp);
 }
+void delete_at_any_pos()
+{
+    int pos;
+    printf("Enter the pos: ");
+    scanf("%d", &pos);
+    if (pos == 1)
+    {
+        delete_at_beginning();
+        return;
+    }
+    if (head == NULL)
+    {
+        printf("List is empty!");
+        return;
+    }
+    struct node *temp = head;
+    for (int i = 1; i < pos - 1 && temp != NULL; i++)
+    {
+        temp = temp->next;
+    }
+    struct node *del = temp->next;
+    temp->next = del->next;
+    if (del->next != NULL)
+    {
+        del->next->prev = temp;
+    }
+    free(del);
+}
 
+void delete_at_end()
+{
+    if (head == NULL)
+    {
+        printf("List it empty!");
+        return;
+    }
+    struct node *temp = head;
+    while (temp->next != NULL)
+    {
+        temp = temp->next;
+    }
+    if (temp->prev == NULL) // if there is only one node 
+    {
+        head == NULL;
+    }
+    else
+    {
+        temp->prev->next = NULL;
+    }
+    free(temp);
+}
 void traverse()
 {
     if (!head)
