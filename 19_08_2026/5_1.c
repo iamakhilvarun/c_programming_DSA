@@ -144,7 +144,7 @@ void delete_at_end()
     {
         temp = temp->next;
     }
-    if (temp->prev == NULL) // if there is only one node 
+    if (temp->prev == NULL) // if there is only one node
     {
         head == NULL;
     }
@@ -196,10 +196,15 @@ int main()
             insert_end();
             break;
         case 4:
+            delete_at_beginning();
             break;
         case 5:
+            delete_at_any_pos();
             break;
         case 6:
+            delete_at_end();
+            break;
+        case 7:
             traverse();
             break;
         default:
