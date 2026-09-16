@@ -1,214 +1,101 @@
 #include <stdio.h>
-#include <stdlib.h>
-struct node
+#define N 5
+int stack[N];
+int top = -1;
+
+void push()
 {
-    int data;
-    struct node *next;
-    struct node *prev;
-};
-struct node *head = NULL;
-
-void insertbeginning()
-{
-    struct node *newnode = (struct node *)malloc(sizeof(struct node));
-
-    printf("Enter the data: ");
-    scanf("%d", &newnode->data);
-
-    if (head == NULL)
+    if (top == N - 1)
     {
-        newnode->next = NULL;
-        newnode->prev = NULL;
-        head = newnode;
-    }
-    else
-    {
-        newnode->next = head;
-        newnode->prev = NULL;
-        head->prev = newnode;
-        head = newnode;
-    }
-}
-void insert_end()
-{
-    struct node *newnode = (struct node *)malloc(sizeof(struct node));
-    struct node *temp = head;
-
-    if (head == NULL)
-    {
-        head = newnode;
+        printf("overflow!");
         return;
     }
-    while (temp->next != NULL)
-    {
-        temp = temp->next;
-    }
-    temp->next = newnode;
-    newnode->prev = temp;
-}
-void insertatanypos()
-{
-    int pos;
-    printf("Enter the pos: ");
-    scanf("%d", &pos);
-    struct node *newnode = (struct node *)malloc(sizeof(struct node));
-    struct node *temp = head;
-    printf("Enter the data:");
-    scanf("%d", &newnode->data);
 
-    if (!head)
-    {
-        newnode->next = NULL;
-        newnode->prev = NULL;
-        head = newnode;
-        return;
-    }
-    if (pos == 1)
-    {
-        insertatbeginning();
-        return;
-    }
-    // traversing to next node
-    for (int i = 1; i < pos - 1 && temp != NULL; i++)
-    {
-        temp = temp->next;
-    }
-
-    if (temp == NULL)
-    {
-        printf("Invaild position");
-        return;
-    }
-    newnode->next = temp->next;
-    newnode->prev = temp;
-    if (temp->next != NULL)
-    {
-        temp->next->prev = newnode;
-    }
-    temp->next = newnode;
+    int x;
+    printf("Enter the element: ");
+    scanf("%d", &x);
+    top++;
+    stack[top] = x;
 }
 
-void delete_at_beginning()
+void pop()
 {
-    if (head == NULL)
+    if (top == -1)
     {
-        printf("list it empty!");
+        printf("Underflow condition!");
         return;
     }
-    struct node *temp = head;
-    head = head->next;
-    if (head != NULL)
-    {
-        head->prev = NULL;
-    }
-    free(temp);
-}
-void delete_at_any_pos()
-{
-    int pos;
-    printf("Enter the pos: ");
-    scanf("%d", &pos);
-    if (pos == 1)
-    {
-        delete_at_beginning();
-        return;
-    }
-    if (head == NULL)
-    {
-        printf("List is empty!");
-        return;
-    }
-    struct node *temp = head;
-    for (int i = 1; i < pos - 1 && temp != NULL; i++)
-    {
-        temp = temp->next;
-    }
-    struct node *del = temp->next;
-    temp->next = del->next;
-    if (del->next != NULL)
-    {
-        del->next->prev = temp;
-    }
-    free(del);
+    int item;
+    item = stack[top];
+    top--;
+    printf("popped item: %d ", item);
 }
 
-void delete_at_end()
-{
-    if (head == NULL)
-    {
-        printf("List it empty!");
-        return;
-    }
-    struct node *temp = head;
-    while (temp->next != NULL)
-    {
-        temp = temp->next;
-    }
-    if (temp->prev == NULL) // if there is only one node
-    {
-        head == NULL;
-    }
-    else
-    {
-        temp->prev->next = NULL;
-    }
-    free(temp);
-}
 void traverse()
 {
-    if (!head)
+    if (top == -1)
     {
-        printf("Empty list!");
+        printf("underflow!");
         return;
     }
-    struct node *temp = head;
-    printf("Elements of the list: ");
-    while (temp != NULL)
+    for (int i = 0; i <= top; i++)
     {
-        printf("%d->\n", temp->data);
-        temp = temp->next;
+        printf("%d ", stack[i]);
     }
 }
 
-int main()
+void peek()
 {
-    int choice;
-    do
+    if (top == -1)
     {
-        printf("1) Insertatbeginning\n");
-        printf("2) Insert\n");
-        printf("3) Deleteatbeginning\n");
-        printf("4) Delete\n");
-        printf("5) Traverse\n");
-        printf("6) Exit the program.....\n");
+        printf("underflow");
+        return;
+    }
 
-        scanf("%d", &choice);
+    printf("\tpeek:%d ", stack[top]);
+}
 
-        switch (choice)
-        {
-        case 1:
-            insertbeginning();
-            break;
-        case 2:
-            insert();
-            break;
-        case 3:
-            insert_end();
-            break;
-        case 4:
-            delete_at_beginning();
-            break;
-        case 5:
-            delete_at_any_pos();
-            break;
-        case 6:
-            delete_at_end();
-            break;
-        case 7:
-            traverse();
-            break;
-        default:
-            break;
-        }
-    } while (choice != 6);
+void isempty()
+{
+    if (top == -1)
+    {
+        printf("stack is empty!");
+        return;
+    }
+    else{
+        printf("stack is not empty!");
+        return;
+    }
+}
+
+void isfull()
+{
+    if (top == N-1)
+    {
+        printf("stack is full!");
+        return;
+    }
+    else{
+        printf("stack is not full!");
+        return;
+    }
+}
+
+
+int main(){
+    push();
+    push();
+    push();
+    push();
+    push();
+    push();
+    pop();
+    peek();
+    traverse();
+    pop();
+    traverse();
+    isempty();
+    isfull();
+
+    return 0;
 }
