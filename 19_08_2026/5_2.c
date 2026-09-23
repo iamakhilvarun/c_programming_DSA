@@ -47,6 +47,7 @@ void traverse()
         printf("%d->", temp->data);
         temp = temp->next;
     }
+    printf("Null");
 }
 
 void isempty()
@@ -54,12 +55,10 @@ void isempty()
     if (top == NULL)
     {
         printf("The stack is empty!");
-        return;
     }
     else
     {
         printf("stack is not empty!");
-        return;
     }
 }
 
@@ -73,6 +72,7 @@ int main()
         printf("2.pop\n");
         printf("3.traverse\n");
         printf("4.isempty\n");
+        printf("5.Exit\n");
 
         printf("Enter your choice: ");
         scanf("%d", &choice);
